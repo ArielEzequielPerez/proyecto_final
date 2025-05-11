@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex: 1;
+}
+.grid-products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.sizeImage {
+  width: 300px;
+  height: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-products {
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    align-content: center;
+  }
+}
+
+footer {
+  background-color: #222;
+  /* Color de fondo del footer */
+  color: white;
+  /* Color del texto */
+  text-align: center;
+  padding: 10px 0;
+}
