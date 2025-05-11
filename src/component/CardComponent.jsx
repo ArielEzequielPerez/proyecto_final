@@ -1,12 +1,19 @@
 import Carousel from 'react-bootstrap/Carousel';
 import Card from "react-bootstrap/Card";
+import { useNavigate } from 'react-router-dom';
 
 export default function CardComponent({ product }) {
-  const { title, price, images, description } = product;
+  const {id, title, price, images, description } = product;
+
+  const navigate = useNavigate()
+
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <div className="card-container">
-      <Card className="sizeImage" style={{ width: "18rem" }}>
+      <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         <Carousel>
           {images.map((image, index) => (
             <Carousel.Item key={index}>
@@ -21,7 +28,7 @@ export default function CardComponent({ product }) {
         </Carousel>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Text>{description}</Card.Text>
+          <Card.Text className='card-description'>{description}</Card.Text>
           <Card.Text>
             <strong>${price}</strong>
           </Card.Text>

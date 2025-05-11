@@ -5,6 +5,7 @@ import About from './pages/About'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Footer from './component/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppRoutes from './routes/routes'
 function App() {
 
   return (
@@ -13,8 +14,14 @@ function App() {
         <div>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            {AppRoutes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+
           </Routes>
         </div>
       </Router>
