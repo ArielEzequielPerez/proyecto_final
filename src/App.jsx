@@ -6,26 +6,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AppRoutes from "./routes/routes";
 import useCart from "./hooks/useCart";
 function App() {
-  const cart = useCart();
+  const cartData = useCart();
+
   return (
     <>
-        <Router>
-          <div>
-            <Navbar />
-            <Routes>
-              {AppRoutes.map(({ path, Component }, index) => (
-                <Route
-                  key={index}
-                  path={path}
-                  element={<Component {...cart} />}
-                />
-              ))}
-            </Routes>
-          </div>
-        </Router>
-        <footer>
-          <Footer />
-        </footer>
+      <Router>
+        <div>
+          <Navbar />
+          <Routes>
+            {AppRoutes(cartData).map(({ path, Component, props }, index) => (
+              <Route
+                key={index}
+                path={path}
+                element={<Component {...props} />}
+              />
+            ))}
+          </Routes>
+        </div>
+      </Router>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }

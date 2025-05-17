@@ -30,7 +30,7 @@ export default function Navbar() {
                 <Nav.Link as={Link} to="/cart" className="text-white">
                   <FontAwesomeIcon icon={faCartShopping} />
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about" className="text-white">
+                <Nav.Link as={Link} to="/login" className="text-white">
                   <FontAwesomeIcon icon={faUser} />
                 </Nav.Link>
               </div>

@@ -57,12 +57,12 @@ footer {
 }
 
 .card-description {
-  height: 100px; 
+  height: 150px; 
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  font-weight: 100;
+  font-weight: 150;
 }
 
 .login-container {
@@ -144,4 +144,23 @@ footer {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.container-product-detail{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.product-price,
+.product-description{
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+@media screen and (320px <= width <= 768px) { 
+  .container-product-detail {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  } 
 }

@@ -33,21 +33,25 @@ export default function Cart({ cart, incrementQuantity, decrementQuantity }) {
                       </td>
                       <td>{product.title}</td>
                       <td>${product.price}</td>
-                      <td className="d-flex align-items-start gap-4">
-                        <div className="d-flex align-items-center">
-                          <button
-                            className="btn btn-sm btn-outline-secondary"
-                            onClick={() => decrementQuantity(product.id)}
-                          >
-                            -
-                          </button>
-                          <span className="mx-2">{product.quantity || 1}</span>
-                          <button
-                            className="btn btn-sm btn-outline-primary"
-                            onClick={() => incrementQuantity(product.id)}
-                          >
-                            +
-                          </button>
+                      <td>
+                        <div className="d-flex align-items-start gap-4">
+                          <div className="d-flex align-items-center">
+                            <button
+                              className="btn btn-sm btn-outline-secondary"
+                              onClick={() => decrementQuantity(product.id)}
+                            >
+                              -
+                            </button>
+                            <span className="mx-2">
+                              {product.quantity || 1}
+                            </span>
+                            <button
+                              className="btn btn-sm btn-outline-primary"
+                              onClick={() => incrementQuantity(product.id)}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </td>
                       <td>

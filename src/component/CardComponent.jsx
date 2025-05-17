@@ -10,7 +10,14 @@ export default function CardComponent({ product, addToCart }) {
   const handleCardClick = () => {
     navigate(`/product/${id}`);
   };
+   const MAXLEGTH = 250;
 
+  const truncateText = (text) => {
+    if (text.length > MAXLEGTH) {
+      return text.substring(0, MAXLEGTH) + "...";
+    }
+    return text;
+  };
   return (
     <div className="card-container">
       <Card style={{ cursor: "pointer" }}>
@@ -28,7 +35,7 @@ export default function CardComponent({ product, addToCart }) {
         </Carousel>
         <Card.Body onClick={handleCardClick}>
           <Card.Title>{title}</Card.Title>
-          <Card.Text className="card-description">{description}</Card.Text>
+          <Card.Text className="card-description">{truncateText(description)}</Card.Text>
           <Card.Text>
             <strong>${price}</strong>
           </Card.Text>

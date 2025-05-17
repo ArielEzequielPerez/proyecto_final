@@ -1,14 +1,34 @@
-import Cart from '../component/Cart';
-import Home from '../pages/Home';
-import About from '../pages/Login';
-import ProductDetail from '../pages/Product';
+import Cart from "../component/Cart";
+import Home from "../pages/Home";
+import login from "../pages/Login";
+import ProductDetail from "../pages/Product";
 
-const AppRoutes = [
-  { path: '/', Component: Home },
-  { path: '/about', Component: About },
-  { path: '/product/:id', Component: ProductDetail },
-  { path: '/cart', Component: Cart },
-  
+const AppRoutes = (cartData) => [
+  {
+    path: "/",
+    Component: Home,
+    props: { products: cartData.products, addToCart: cartData.addToCart },
+  },
+
+  { path: "/login", Component: login, props: {} },
+
+  {
+    path: "/product/:id",
+    Component: ProductDetail,
+    props: { products: cartData.products, addToCart: cartData.addToCart },
+  },
+
+  {
+    path: "/cart",
+    Component: Cart,
+    props: {
+      cart: cartData.cart,
+      removeFromCart: cartData.removeFromCart,
+      incrementQuantity: cartData.incrementQuantity,
+      decrementQuantity: cartData.decrementQuantity,
+      totalPrice: cartData.totalPrice,
+    },
+  },
 ];
 
 export default AppRoutes;

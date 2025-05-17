@@ -1,5 +1,5 @@
 let cachedProducts = null;
-
+const URL = "https://api.escuelajs.co/api/v1/products"
 const fetchData = async (url) => {
   try {
     const response = await fetch(url);
@@ -18,14 +18,10 @@ export const fetchProducts = async () => {
     return cachedProducts;
   }
 
-  const products = await fetchData("https://api.escuelajs.co/api/v1/products");
+  const products = await fetchData(URL);
   if (products) {
     cachedProducts = products;
   }
   return products || [];
 };
 
-export const fetchProductById = async (id) => {
-  const products = await fetchProducts();
-  return products.find((product) => product.id === parseInt(id)) || null;
-};
