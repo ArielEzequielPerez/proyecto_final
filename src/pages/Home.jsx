@@ -1,25 +1,16 @@
-import useCart from "../hooks/useCart";
 import Card from "../component/CardComponent";
-import Spinner from 'react-bootstrap/Spinner';
+import SpinnerComponent from "../component/SpinnerComponent";
 
-export default function Home() {
-  const { products } = useCart();
-
+export default function Home({ products, addToCart }) {
   return (
     <div className="container">
       <h1>Product List</h1>
       {products.length === 0 ? (
-        <div className="constainer center">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        </div>
+        <SpinnerComponent />
       ) : (
         <div className="grid-products">
           {products.map((product) => (
-            <div key={product.id}>
-              <Card product={product} />
-            </div>
+            <Card key={product.id} product={product} addToCart={addToCart} />
           ))}
         </div>
       )}

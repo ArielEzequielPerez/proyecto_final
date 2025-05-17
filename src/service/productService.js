@@ -1,3 +1,5 @@
+let cachedProducts = null;
+
 const fetchData = async (url) => {
   try {
     const response = await fetch(url);
@@ -12,9 +14,18 @@ const fetchData = async (url) => {
 };
 
 export const fetchProducts = async () => {
-  return (await fetchData("https://api.escuelajs.co/api/v1/products")) || [];
+  if (cachedProducts) {
+    return cachedProducts;
+  }
+
+  const products = await fetchData("https://api.escuelajs.co/api/v1/products");
+  if (products) {
+    cachedProducts = products;
+  }
+  return products || [];
 };
 
 export const fetchProductById = async (id) => {
-  return await fetchData(`https://api.escuelajs.co/api/v1/products/${id}`);
+  const products = await fetchProducts();
+  return products.find((product) => product.id === parseInt(id)) || null;
 };

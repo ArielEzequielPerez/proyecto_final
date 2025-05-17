@@ -2,6 +2,9 @@ import React from "react";
 import { Navbar as BootstrapNavbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Navbar() {
   return (
@@ -24,8 +27,11 @@ export default function Navbar() {
                 <Nav.Link as={Link} to="/" className="text-white">
                   Home
                 </Nav.Link>
+                <Nav.Link as={Link} to="/cart" className="text-white">
+                  <FontAwesomeIcon icon={faCartShopping} />
+                </Nav.Link>
                 <Nav.Link as={Link} to="/about" className="text-white">
-                  About
+                  <FontAwesomeIcon icon={faUser} />
                 </Nav.Link>
               </div>
             </Nav>

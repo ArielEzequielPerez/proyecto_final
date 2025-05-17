@@ -1,11 +1,11 @@
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
-export default function CardComponent({ product }) {
-  const {id, title, price, images, description } = product;
-
-  const navigate = useNavigate()
+export default function CardComponent({ product, addToCart }) {
+  const { id, title, price, images, description } = product;
+  const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/product/${id}`);
@@ -13,8 +13,8 @@ export default function CardComponent({ product }) {
 
   return (
     <div className="card-container">
-      <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
-        <Carousel>
+      <Card style={{ cursor: "pointer" }}>
+        <Carousel onClick={handleCardClick}>
           {images.map((image, index) => (
             <Carousel.Item key={index}>
               <img
@@ -26,13 +26,21 @@ export default function CardComponent({ product }) {
             </Carousel.Item>
           ))}
         </Carousel>
-        <Card.Body>
+        <Card.Body onClick={handleCardClick}>
           <Card.Title>{title}</Card.Title>
-          <Card.Text className='card-description'>{description}</Card.Text>
+          <Card.Text className="card-description">{description}</Card.Text>
           <Card.Text>
             <strong>${price}</strong>
           </Card.Text>
         </Card.Body>
+        <Card.Footer className="d-flex justify-content-between align-items-center gap-2">
+          <Button variant="secondary" onClick={handleCardClick}>
+            Ver detalles
+          </Button>
+          <Button variant="primary" onClick={() => addToCart(product)}>
+            Agregar al carrito
+          </Button>
+        </Card.Footer>
       </Card>
     </div>
   );
