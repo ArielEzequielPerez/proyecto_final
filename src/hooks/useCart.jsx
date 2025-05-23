@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchProducts } from "../service/productService";
-
+import Swal from "sweetalert2";
 export default function useCart() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -11,7 +11,7 @@ export default function useCart() {
       setProducts(data);
     };
     getProducts();
-  }, []);
+  }, []);  
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -23,6 +23,17 @@ export default function useCart() {
             : item
         );
       }
+
+      Swal.fire({
+        position: "top-end",
+        title: "Producto agregado",
+        text: `${product.title} se ha agregado al carrito.`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+
       return [...prevCart, { ...product, quantity: 1 }];
     });
   };
@@ -49,7 +60,7 @@ export default function useCart() {
     );
   };
 
-  const totalPrice = useMemo(() => {
+  const total = useMemo(() => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }, [cart]);
 
@@ -60,6 +71,6 @@ export default function useCart() {
     removeFromCart,
     incrementQuantity,
     decrementQuantity,
-    totalPrice,
+    total,
   };
 }

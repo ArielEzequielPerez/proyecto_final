@@ -4,7 +4,6 @@ import SpinnerComponent from "../component/SpinnerComponent";
 export default function Home({ products, addToCart }) {
   return (
     <div className="container">
-      <h1>Product List</h1>
       {products.length === 0 ? (
         <SpinnerComponent />
       ) : (

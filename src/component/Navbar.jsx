@@ -24,9 +24,6 @@ export default function Navbar() {
           <BootstrapNavbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <div className="d-flex gap-2">
-                <Nav.Link as={Link} to="/" className="text-white">
-                  Home
-                </Nav.Link>
                 <Nav.Link as={Link} to="/cart" className="text-white">
                   <FontAwesomeIcon icon={faCartShopping} />
                 </Nav.Link>

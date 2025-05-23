@@ -26,7 +26,7 @@ const AppRoutes = (cartData) => [
       removeFromCart: cartData.removeFromCart,
       incrementQuantity: cartData.incrementQuantity,
       decrementQuantity: cartData.decrementQuantity,
-      totalPrice: cartData.totalPrice,
+      total: cartData.total,
     },
   },
 ];

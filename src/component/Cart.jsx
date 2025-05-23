@@ -1,7 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-export default function Cart({ cart, incrementQuantity, decrementQuantity }) {
+export default function Cart({
+  cart,
+  incrementQuantity,
+  decrementQuantity,
+  total,
+}) {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Container>
@@ -18,7 +23,7 @@ export default function Cart({ cart, incrementQuantity, decrementQuantity }) {
                     <th>Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Total</th>
+                    <th>Subtotal</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -34,24 +39,20 @@ export default function Cart({ cart, incrementQuantity, decrementQuantity }) {
                       <td>{product.title}</td>
                       <td>${product.price}</td>
                       <td>
-                        <div className="d-flex align-items-start gap-4">
-                          <div className="d-flex align-items-center">
-                            <button
-                              className="btn btn-sm btn-outline-secondary"
-                              onClick={() => decrementQuantity(product.id)}
-                            >
-                              -
-                            </button>
-                            <span className="mx-2">
-                              {product.quantity || 1}
-                            </span>
-                            <button
-                              className="btn btn-sm btn-outline-primary"
-                              onClick={() => incrementQuantity(product.id)}
-                            >
-                              +
-                            </button>
-                          </div>
+                        <div className="d-flex align-items-center">
+                          <button
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() => decrementQuantity(product.id)}
+                          >
+                            -
+                          </button>
+                          <span className="mx-2">{product.quantity || 1}</span>
+                          <button
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => incrementQuantity(product.id)}
+                          >
+                            +
+                          </button>
                         </div>
                       </td>
                       <td>
@@ -60,6 +61,16 @@ export default function Cart({ cart, incrementQuantity, decrementQuantity }) {
                     </tr>
                   ))}
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colSpan="4" className="text-end">
+                      <strong>Total General:</strong>
+                    </td>
+                    <td>
+                      <strong>${total.toFixed(2)}</strong>
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
             )}
           </div>

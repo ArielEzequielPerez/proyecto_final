@@ -11,22 +11,27 @@ function App() {
   return (
     <>
       <Router>
-        <div>
-          <Navbar />
-          <Routes>
-            {AppRoutes(cartData).map(({ path, Component, props }, index) => (
-              <Route
-                key={index}
-                path={path}
-                element={<Component {...props} />}
-              />
-            ))}
-          </Routes>
+        <div className="container-app">
+          <header>
+            <Navbar />
+          </header>
+          <main>
+            <Routes>
+              {AppRoutes(cartData).map(({ path, Component, props }, index) => (
+                <Route
+                  key={index}
+                  path={path}
+                  element={<Component {...props} />}
+                />
+              ))}
+            </Routes>
+          </main>
+
+          <footer className="bg-dark text-white py-3">
+            <Footer />
+          </footer>
         </div>
       </Router>
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 }
