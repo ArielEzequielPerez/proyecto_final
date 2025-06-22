@@ -3,10 +3,12 @@ import { Navbar as BootstrapNavbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
-
+import { faCartShopping, faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useAuthContext } from "../context/AuthContext";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
 
 export default function Navbar() {
+  const { user, logout } = useAuthContext();
   return (
     <BootstrapNavbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -24,12 +26,23 @@ export default function Navbar() {
           <BootstrapNavbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <div className="d-flex gap-2">
+                {user && (
+                  <Nav.Link as={Link} to="/new" className="text-white">
+                    <FontAwesomeIcon icon={faCartPlus} />
+                  </Nav.Link>
+                )}
                 <Nav.Link as={Link} to="/cart" className="text-white">
                   <FontAwesomeIcon icon={faCartShopping} />
                 </Nav.Link>
-                <Nav.Link as={Link} to="/login" className="text-white">
-                  <FontAwesomeIcon icon={faUser} />
-                </Nav.Link>
+                {user ? (
+                  <Nav.Link onClick={logout} className="text-white">
+                    <FontAwesomeIcon icon={faSignOutAlt} />{" "}
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link as={Link} to="/login" className="text-white">
+                    <FontAwesomeIcon icon={faUser} /> {/* Ícono de Login */}
+                  </Nav.Link>
+                )}
               </div>
             </Nav>
           </BootstrapNavbar.Collapse>

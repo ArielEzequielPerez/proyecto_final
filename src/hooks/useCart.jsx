@@ -11,7 +11,7 @@ export default function useCart() {
       setProducts(data);
     };
     getProducts();
-  }, []);  
+  }, []);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -32,7 +32,6 @@ export default function useCart() {
         timer: 2000,
         showConfirmButton: false,
       });
-
 
       return [...prevCart, { ...product, quantity: 1 }];
     });
@@ -64,6 +63,12 @@ export default function useCart() {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }, [cart]);
 
+  const category = [
+    ...new Map(
+      products?.map((product) => [product.category.id, product.category])
+    ).values(),
+  ];
+
   return {
     products,
     cart,
@@ -71,6 +76,7 @@ export default function useCart() {
     removeFromCart,
     incrementQuantity,
     decrementQuantity,
+    category,
     total,
   };
 }

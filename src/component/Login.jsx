@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Login() {
+  const { login } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -9,7 +11,7 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Login Data:", data);
+    login(data.email, data.password);
   };
 
   return (

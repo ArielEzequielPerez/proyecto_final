@@ -5,12 +5,14 @@ import Footer from "./component/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AppRoutes from "./routes/routes";
 import useCart from "./hooks/useCart";
+import { AuthProvider } from "./context/AuthContext";
+
 function App() {
   const cartData = useCart();
 
   return (
-    <>
-      <Router>
+    <Router>
+      <AuthProvider>
         <div className="container-app">
           <header>
             <Navbar />
@@ -31,8 +33,8 @@ function App() {
             <Footer />
           </footer>
         </div>
-      </Router>
-    </>
+      </AuthProvider>
+    </Router>
   );
 }
 

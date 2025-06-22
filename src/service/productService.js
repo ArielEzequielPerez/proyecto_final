@@ -13,6 +13,8 @@ const fetchData = async (url) => {
   }
 };
 
+const category = cachedProducts?.map((product) => product.category.name);
+
 export const fetchProducts = async () => {
   if (cachedProducts) {
     return cachedProducts;

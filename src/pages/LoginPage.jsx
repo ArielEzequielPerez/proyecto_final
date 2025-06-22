@@ -1,6 +1,6 @@
 import Login from "../component/Login";
 
-export default function About() {
+export default function LoginPage() {
   return (
     <div className="page-container">
       <div className="content-wrapper">

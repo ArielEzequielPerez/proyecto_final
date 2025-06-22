@@ -1,7 +1,9 @@
 import Cart from "../component/Cart";
 import Home from "../pages/Home";
-import login from "../pages/Login";
+import Login from "../pages/LoginPage";
 import ProductDetail from "../pages/Product";
+import AddProduct from "../pages/AddProductPage";
+import PrivateRoute from "../component/PrivateRoute";
 
 const AppRoutes = (cartData) => [
   {
@@ -9,15 +11,16 @@ const AppRoutes = (cartData) => [
     Component: Home,
     props: { products: cartData.products, addToCart: cartData.addToCart },
   },
-
-  { path: "/login", Component: login, props: {} },
-
+  {
+    path: "/login",
+    Component: Login,
+    props: {},
+  },
   {
     path: "/product/:id",
     Component: ProductDetail,
     props: { products: cartData.products, addToCart: cartData.addToCart },
   },
-
   {
     path: "/cart",
     Component: Cart,
@@ -28,6 +31,15 @@ const AppRoutes = (cartData) => [
       decrementQuantity: cartData.decrementQuantity,
       total: cartData.total,
     },
+  },
+  {
+    path: "/new",
+    Component: (props) => (
+      <PrivateRoute>
+        <AddProduct {...props}/>
+      </PrivateRoute>
+    ),
+    props: { category: cartData.category},
   },
 ];
 
