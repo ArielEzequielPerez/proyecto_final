@@ -24,8 +24,8 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
 
 ## Estructura del proyecto
 
-- **`src/component`**: Contiene los componentes reutilizables como `CardComponent`, `Cart`.
-- **`src/hooks`**: Contiene el hook `useCart` para manejar la lógica del carrito.
+- **`src/component`**: Contiene los componentes reutilizables como `CardComponent`, `Cart`, `etc...`.
+- **`src/context`**: Contiene los estados globales del carrito y de autenticación
 - **`src/service`**: Contiene los servicios para interactuar con la API externa.
 - **`src/routes`**: Define las rutas de la aplicación.
 
@@ -44,3 +44,5 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
     npm run dev
 
 4. Abre la aplicación en tu navegador en [aqui](http://localhost:3000).
+
+5. Proximamente se desplegara en local con docker y docker compose

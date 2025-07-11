@@ -1,10 +1,22 @@
-import { useEffect, useMemo, useState } from "react";
-import { fetchProducts } from "../service/productService";
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
+import { fetchProducts, fetchCategories } from "../service/productService";
 import Swal from "sweetalert2";
-export default function useCart() {
+
+const CartContext = createContext(null);
+
+export const CartProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
 
+  useEffect(() => {
+    const getCategories = async () => {
+      const data = await fetchCategories();
+      setCategories(data);
+    };
+    getCategories();
+  }, []);
+  
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchProducts();
@@ -63,20 +75,24 @@ export default function useCart() {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }, [cart]);
 
-  const category = [
-    ...new Map(
-      products?.map((product) => [product.category.id, product.category])
-    ).values(),
-  ];
-
-  return {
+  const value = {
     products,
     cart,
     addToCart,
     removeFromCart,
     incrementQuantity,
     decrementQuantity,
-    category,
+    categories,
     total,
   };
-}
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};
+
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart debe usarse dentro de un CartProvider");
+  }
+  return context;
+};

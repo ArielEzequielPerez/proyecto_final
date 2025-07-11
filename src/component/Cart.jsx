@@ -1,12 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { useCart } from "../context/useCart";
 
-export default function Cart({
-  cart,
-  incrementQuantity,
-  decrementQuantity,
-  total,
-}) {
+export default function Cart() {
+  const {cart, incrementQuantity, decrementQuantity, total} = useCart()
+
   return (
     <div className="d-flex flex-column min-vh-100">
       <Container>

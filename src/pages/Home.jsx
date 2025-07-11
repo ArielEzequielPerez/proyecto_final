@@ -1,7 +1,9 @@
 import Card from "../component/CardComponent";
 import SpinnerComponent from "../component/SpinnerComponent";
+import { useCart } from "../context/useCart";
 
-export default function Home({ products, addToCart }) {
+export default function Home() {
+  const { products } = useCart()
   return (
     <div className="container">
       {products.length === 0 ? (
@@ -9,7 +11,7 @@ export default function Home({ products, addToCart }) {
       ) : (
         <div className="grid-products">
           {products.map((product) => (
-            <Card key={product.id} product={product} addToCart={addToCart} />
+            <Card key={product.id} product={product}/>
           ))}
         </div>
       )}

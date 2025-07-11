@@ -1,7 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import CardComponent from "./CardComponent";
-export default function Product({ product, addToCart, products }) {
+import { useCart } from "../context/useCart";
+export default function Product({ product }) {
+  const { addToCart, products } = useCart()
   const handleAddToCart = () => {
     addToCart(product);
   };

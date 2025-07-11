@@ -2,8 +2,10 @@ import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { useCart } from "../context/useCart";
 
-export default function CardComponent({ product, addToCart }) {
+export default function CardComponent({ product }) {
+  const { addToCart } = useCart();
   const { id, title, price, images, description } = product;
   const navigate = useNavigate();
 

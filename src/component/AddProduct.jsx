@@ -1,8 +1,9 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useCart } from "../context/useCart";
 
-export default function AddProductForm({ category }) {
+export default function AddProductForm() {
+  const { categories } = useCart()
   const {
     register,
     handleSubmit,
@@ -105,9 +106,9 @@ export default function AddProductForm({ category }) {
             className={`form-control ${errors.categoryId ? "is-invalid" : ""}`}
           >
             <option value="">Selecciona una categoría</option>
-            {category.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
             ))}
           </select>

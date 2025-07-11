@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SpinnerComponent from "../component/SpinnerComponent";
 import Product from "../component/Product";
+import { useCart } from "../context/useCart";
 
-export default function ProductDetail({ products, addToCart }) {
+export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { products, addToCart } = useCart()
 
   useEffect(() => {
     const foundProduct = products.find(
