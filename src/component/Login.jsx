@@ -1,6 +1,6 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const { login } = useAuthContext();
@@ -23,7 +23,9 @@ export default function Login() {
           <input
             id="email"
             type="email"
-            {...register("email", { required: "El correo electrónico es obligatorio" })}
+            {...register("email", {
+              required: "El correo electrónico es obligatorio",
+            })}
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
           />
           {errors.email && (
@@ -35,7 +37,9 @@ export default function Login() {
           <input
             id="password"
             type="password"
-            {...register("password", { required: "La contraseña es obligatoria" })}
+            {...register("password", {
+              required: "La contraseña es obligatoria",
+            })}
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
           />
           {errors.password && (
@@ -46,6 +50,9 @@ export default function Login() {
           <button type="submit" className="btn btn-primary">
             Iniciar Sesión
           </button>
+        </div>
+        <div className="d-flex justify-content-center align-items-center mt-4 w-100 rounded-6">
+        <Link as={Link} to="/register" className="btn btn-primary">Registrase</Link>
         </div>
       </form>
     </div>

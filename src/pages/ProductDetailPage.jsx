@@ -19,7 +19,7 @@ export default function ProductDetail() {
   const sameCategry = products.filter(
     (item) =>
       item.category.name === product?.category.name && item.id !== product?.id
-  );
+  );//cambiar
 
   return (
     <>

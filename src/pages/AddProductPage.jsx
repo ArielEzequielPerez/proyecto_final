@@ -1,5 +1,9 @@
 import AddProduct from "../component/AddProduct";
 
 export default function AddProductPage() {
-  return <AddProduct />;
+  return (
+    <div className="page-container">
+        <AddProduct />;
+      </div>
+  );
 }

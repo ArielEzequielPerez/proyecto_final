@@ -118,10 +118,12 @@ export default function AddProductForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="images">Imágenes (URLs separadas por comas)</label>
+          <label htmlFor="images">Subir imágenes</label>
           <input
             id="images"
-            type="text"
+            type="file"
+            multiple
+            accept="image/*"
             {...register("images", {
               required: "Las imágenes son obligatorias",
             })}
@@ -133,12 +135,11 @@ export default function AddProductForm() {
         </div>
 
         <div className="container-btn">
-          <button
-            type="submit"
-            className="btn btn-primary"
-          >
-            Guardar Producto
-          </button>
+          <div className="d-flex justify-content-center align-items-center ">
+            <button type="submit" className="btn btn-primary">
+              Guardar
+            </button>
+          </div>
         </div>
       </form>
     </div>

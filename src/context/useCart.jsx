@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
     };
     getCategories();
   }, []);
-  
+
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchProducts();
@@ -75,9 +75,15 @@ export const CartProvider = ({ children }) => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }, [cart]);
 
+  const findProduct = (id) => {
+    if (!products || products.length === 0) return null;
+    return products.find((product) => product.id === parseInt(id));
+  };
+  
   const value = {
     products,
     cart,
+    findProduct,
     addToCart,
     removeFromCart,
     incrementQuantity,

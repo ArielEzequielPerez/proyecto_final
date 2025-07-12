@@ -1,9 +1,12 @@
 import Cart from "../component/Cart";
 import Home from "../pages/Home";
 import Login from "../pages/LoginPage";
-import ProductDetail from "../pages/ProductDetail";
+import ProductDetail from "../pages/ProductDetailPage";
 import AddProduct from "../pages/AddProductPage";
 import PrivateRoute from "../component/PrivateRoute";
+import RegisterPage from "../pages/RegisterPage";
+import EditProduct from "../pages/EditProductPage";
+import Products from "../pages/ProductListPage";
 
 const AppRoutes = (cartData) => [
   {
@@ -13,6 +16,10 @@ const AppRoutes = (cartData) => [
   {
     path: "/login",
     Component: Login,
+  },
+  {
+    path:"/register",
+    Component: RegisterPage
   },
   {
     path: "/product/:id",
@@ -27,6 +34,22 @@ const AppRoutes = (cartData) => [
     Component: () => (
       <PrivateRoute>
         <AddProduct />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/edit/:id",
+    Component: () => (
+      <PrivateRoute>
+        <EditProduct />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/products",
+    Component: () => (
+      <PrivateRoute>
+        <Products />
       </PrivateRoute>
     ),
   },

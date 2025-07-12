@@ -1,9 +1,13 @@
-import React from "react";
 import { Navbar as BootstrapNavbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faUser,
+  faSignOutAlt,
+  faBoxes
+} from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "../context/AuthContext";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
 
@@ -27,9 +31,19 @@ export default function Navbar() {
             <Nav className="me-auto">
               <div className="d-flex gap-2">
                 {user && (
-                  <Nav.Link as={Link} to="/new" className="text-white">
-                    <FontAwesomeIcon icon={faCartPlus} />
-                  </Nav.Link>
+                  <>
+                    <Nav.Link as={Link} to="/new" className="text-white">
+                      <FontAwesomeIcon icon={faCartPlus} />
+                    </Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/products"
+                      className="text-white"
+                      title="Ver productos"
+                    >
+                      <FontAwesomeIcon icon={faBoxes} />
+                    </Nav.Link>
+                  </>
                 )}
                 <Nav.Link as={Link} to="/cart" className="text-white">
                   <FontAwesomeIcon icon={faCartShopping} />
