@@ -17,7 +17,7 @@ export default function Register() {
         email: data.email,
         password: data.password,
         avatar:
-          data.avatar || "https://api.lorem.space/image/face?w=640&h=480&r=867", // avatar opcional
+          data.avatar || "https://api.lorem.space/image/face?w=640&h=480&r=867",
       });
 
       Swal.fire({

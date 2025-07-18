@@ -1,17 +1,12 @@
-const cache = new Map();
 
 const fetchFromApi = async (url) => {
-  if (cache.has(url)) {
-    return cache.get(url);
-  }
-
+ 
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
     }
     const data = await response.json();
-    cache.set(url, data);
     return data;
   } catch (error) {
     console.error(`Error fetching data from ${url}:`, error.message);
@@ -25,3 +20,40 @@ const URL_CATEGORIES = "https://api.escuelajs.co/api/v1/categories";
 export const fetchProducts = () => fetchFromApi(URL_PRODUCTS);
 export const fetchCategories = () => fetchFromApi(URL_CATEGORIES);
 
+export const updateProduct = async (id, productData) => {
+  try {
+    const response = await fetch(`${URL_PRODUCTS}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update product: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Error updating product with ID ${id}:`, error.message);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await fetch(`${URL_PRODUCTS}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete product: ${response.status} ${response.statusText}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error(`Error deleting product with ID ${id}:`, error.message);
+    throw error;
+  }
+};

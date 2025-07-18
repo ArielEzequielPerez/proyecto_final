@@ -1,29 +1,31 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import { fetchProducts, fetchCategories } from "../service/productService";
+import { fetchProducts, fetchCategories, updateProduct, deleteProduct } from "../service/productService";
+import { ToastContainer, toast } from 'react-toastify';
+
 import Swal from "sweetalert2";
 
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
     const getCategories = async () => {
       const data = await fetchCategories();
       setCategories(data);
     };
-    getCategories();
-  }, []);
+    getCategories()
+  }, [])
 
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchProducts();
-      setProducts(data);
+      setProducts(data)
     };
-    getProducts();
-  }, []);
+    getProducts()
+  }, [])
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -46,8 +48,8 @@ export const CartProvider = ({ children }) => {
       });
 
       return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
+    })
+  }
 
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
@@ -58,8 +60,8 @@ export const CartProvider = ({ children }) => {
       prevCart.map((item) =>
         item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
       )
-    );
-  };
+    )
+  }
 
   const decrementQuantity = (productId) => {
     setCart((prevCart) =>
@@ -68,8 +70,8 @@ export const CartProvider = ({ children }) => {
           ? { ...item, quantity: item.quantity - 1 }
           : item
       )
-    );
-  };
+    )
+  }
 
   const total = useMemo(() => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -78,8 +80,35 @@ export const CartProvider = ({ children }) => {
   const findProduct = (id) => {
     if (!products || products.length === 0) return null;
     return products.find((product) => product.id === parseInt(id));
-  };
+  }
+
+
+  const deleteProductFromContext = async (id) => {
+    try {
+      await deleteProduct(id);
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  }
+
+  const updateProductContext = async (id, productData) => {
+    try {
+      const updatedProduct = await updateProduct(id, productData);
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === id ? updatedProduct : product
+        )
+      );
   
+      toast.success("Producto actualizado correctamente");
+    } catch (error) {
+      toast.error("Error al actualizar el producto");
+    }
+  };
+
   const value = {
     products,
     cart,
@@ -89,6 +118,8 @@ export const CartProvider = ({ children }) => {
     incrementQuantity,
     decrementQuantity,
     categories,
+    deleteProductFromContext,
+    updateProductContext,
     total,
   };
 
