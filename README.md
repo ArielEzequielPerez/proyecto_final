@@ -20,7 +20,7 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
 - **React-Bootstrap**: Para el diseño y los componentes estilizados.
 - **React-Router**: Para la navegación entre páginas.
 - **SweetAlert2**: Para mostrar notificaciones al usuario.
-- **API externa**: Los productos se obtienen desde [Fake Store API](https://api.escuelajs.co/api/v1/products).
+- **API externa**: Los productos se obtienen desde [fakeapi_platzi](https://fakeapi.platzi.com/en/rest/products/).
 
 ## Estructura del proyecto
 
@@ -45,4 +45,24 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
 
 4. Abre la aplicación en tu navegador en [aqui](http://localhost:3000).
 
-5. Proximamente se desplegara en local con docker y docker compose
+## Cómo desplegar el proyecto en local usando Docker
+
+1. Asegúrate de tener Docker y Docker Compose instalados en tu máquina. Si no los tienes, puedes descargarlos desde:
+   - [Docker](https://www.docker.com/products/docker-desktop)
+
+2. Construye y ejecuta el contenedor con Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Una vez que el contenedor esté en ejecución, abre tu navegador y accede a la aplicación en:
+   [http://localhost:8000](http://localhost:8000)
+
+4. Para detener el contenedor, ejecuta:
+   ```bash
+   docker-compose down
+   ```
+
+### Notas
+- El proyecto se ejecutará en el puerto `8000` de tu máquina local.
+- Los cambios realizados en el código fuente se reflejarán automáticamente gracias al volumen configurado en `docker-compose.yml`.
