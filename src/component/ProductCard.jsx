@@ -58,7 +58,6 @@ export default function ProductCart({ product }) {
             ))}
           </Carousel>
         </Col>
-
         <Col md={7}>
           <Card.Body onClick={handleCardClick}>
             <Card.Title>{product.title}</Card.Title>

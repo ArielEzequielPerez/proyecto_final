@@ -1,4 +1,3 @@
-
 const fetchFromApi = async (url) => {
  
   try {
@@ -54,6 +53,27 @@ export const deleteProduct = async (id) => {
     return true;
   } catch (error) {
     console.error(`Error deleting product with ID ${id}:`, error.message);
+    throw error;
+  }
+}
+
+export const addProduct = async (productData) => {
+  try {
+    const response = await fetch("https://api.escuelajs.co/api/v1/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to add product: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding product:", error.message);
     throw error;
   }
 };

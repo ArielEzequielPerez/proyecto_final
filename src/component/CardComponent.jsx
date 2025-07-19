@@ -3,6 +3,21 @@ import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { useCart } from "../context/useCart";
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+`;
+const Description = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
 
 export default function CardComponent({ product }) {
   const { addToCart } = useCart();
@@ -12,21 +27,14 @@ export default function CardComponent({ product }) {
   const handleCardClick = () => {
     navigate(`/product/${id}`);
   };
-  const MAXLEGTH = 200;
-
-  const truncateText = (text) => {
-    if (text.length > MAXLEGTH) {
-      return text.substring(0, MAXLEGTH) + "...";
-    }
-    return text;
-  };
 
   const handleAddToCart = () => {
     addToCart(product);
   };
+
   return (
     <div className="card-container">
-      <Card style={{ cursor: "pointer" }}>
+      <StyledCard style={{ cursor: "pointer" }}>
         <Carousel onClick={handleCardClick}>
           {images.map((image, index) => (
             <Carousel.Item key={index}>
@@ -42,21 +50,18 @@ export default function CardComponent({ product }) {
         <Card.Body onClick={handleCardClick}>
           <Card.Title>{title}</Card.Title>
           <Card.Text className="card-description">
-            {truncateText(description)}
+            <Description>{ description }</Description>
           </Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-between align-items-center gap-3">
           <Card.Text className="mb-0 d-flex align-items-center font-weight-bold font-size-24">
             <strong>${price}</strong>
           </Card.Text>
-          <Button variant="secondary" onClick={handleCardClick}>
-            Ver detalles
-          </Button>
           <Button variant="primary" onClick={handleAddToCart}>
             Agregar al carrito
           </Button>
         </Card.Footer>
-      </Card>
+      </StyledCard>
     </div>
   );
 }

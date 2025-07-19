@@ -3,46 +3,41 @@ import Swal from "sweetalert2";
 import { useCart } from "../context/useCart";
 
 export default function AddProductForm() {
-  const { categories } = useCart()
+  const { categories, addProductContext } = useCart();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
+    watch,
   } = useForm();
+
+  const imagenURL = watch("images");
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("https://api.escuelajs.co/api/v1/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: data.title,
-          slug: data.title.toLowerCase(),
-          price: parseFloat(data.price),
-          description: data.description,
-          category: {
-            id: parseInt(data.categoryId),
-          },
-          images: data.images.split(",").map((url) => url.trim()),
-        }),
+      const newProduct = {
+        title: data.title,
+        price: parseFloat(data.price),
+        description: data.description,
+        categoryId: parseInt(data.categoryId),
+        images: data.images.split(",").map((url) => url.trim()),
+      };
+
+      await addProductContext(newProduct);
+
+      Swal.fire({
+        icon: "success",
+        title: "Producto agregado",
+        text: "El producto se ha agregado correctamente.",
       });
 
-      if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "Producto agregado",
-          text: "El producto se ha agregado correctamente.",
-        });
-      } else {
-        throw new Error("Error al agregar el producto");
-      }
+      reset();
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: error.message,
+        text: error.message || "No se pudo agregar el producto.",
       });
     }
   };
@@ -117,25 +112,43 @@ export default function AddProductForm() {
           )}
         </div>
 
-        <div className="form-group">
-          <label htmlFor="images">Subir imágenes</label>
+        <div>
+          <label>URL de imagen</label>
           <input
-            id="images"
-            type="file"
-            multiple
-            accept="image/*"
+            type="text"
             {...register("images", {
-              required: "Las imágenes son obligatorias",
+              required: "El enlace de imagen es obligatorio",
+              pattern: {
+                message: "Debe ser una URL válida de imagen",
+              },
             })}
-            className={`form-control ${errors.images ? "is-invalid" : ""}`}
+            className="form-control"
+            placeholder="https://example.com/imagen.jpg"
           />
-          {errors.images && (
-            <span className="error-message">{errors.images.message}</span>
+
+          {imagenURL && (
+            <div className="mt-3">
+              {imagenURL
+                .split(",")
+                .map((url) => url.trim())
+                .filter((url) => url)
+                .map((url, index) => (
+                  <img
+                    key={index}
+                    src={url}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: 200,
+                      marginRight: 10,
+                    }}
+                  />
+                ))}
+            </div>
           )}
         </div>
 
         <div className="container-btn">
-          <div className="d-flex justify-content-center align-items-center ">
+          <div className="d-flex justify-content-center align-items-center">
             <button type="submit" className="btn btn-primary">
               Guardar
             </button>
