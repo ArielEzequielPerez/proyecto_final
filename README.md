@@ -66,3 +66,6 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
 ### Notas
 - El proyecto se ejecutará en el puerto `8000` de tu máquina local.
 - Los cambios realizados en el código fuente se reflejarán automáticamente gracias al volumen configurado en `docker-compose.yml`.
+
+  # AUTH
+- al momento de desplegar el proyecto no es necesario loguearse pero si desea actualizar, crear, editar o borrar puede hacerlo creando un usuario.
