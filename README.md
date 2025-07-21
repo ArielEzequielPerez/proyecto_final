@@ -68,4 +68,4 @@ Este proyecto es una aplicación de comercio electrónico desarrollada con React
 - Los cambios realizados en el código fuente se reflejarán automáticamente gracias al volumen configurado en `docker-compose.yml`.
 
   # AUTH
-- al momento de desplegar el proyecto no es necesario loguearse pero si desea actualizar, crear, editar o borrar puede hacerlo creando un usuario.
+- al momento de desplegar el proyecto no es necesario loguearse pero si desea actualizar, crear, editar o borrar un produtos o varios puede hacerlo creando un usuario.
